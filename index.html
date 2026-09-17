@@ -931,7 +931,11 @@
                 width: 420px;
                 height: 500px;
 
-                bottom: 23%;
+                /*
+                 * Bajamos todo el árbol para que las flores
+                 * coincidan con la posición correcta de las ramas.
+                 */
+                bottom: 13%;
 
                 transform: translateX(-50%);
 
@@ -951,7 +955,7 @@
                     width: 86vw;
                     height: 500px;
 
-                    bottom: 23%;
+                    bottom: 13%;
                 }
             }
 
@@ -1071,6 +1075,33 @@
                 font-size: 12px;
             }
         }
+        /* =====================================================
+           PANTALLAS CORTAS / TELÉFONO EN MODO HORIZONTAL
+
+           La captura tiene un viewport ancho pero muy bajo,
+           por eso el @media por ancho no era suficiente.
+           Bajamos el conjunto completo del árbol.
+        ===================================================== */
+
+        @media (max-height: 700px) {
+
+            #tree,
+            #flowers {
+                /*
+                 * Bajamos un poco más el conjunto completo para que
+                 * las flores coincidan mejor con la copa y ramas.
+                 */
+                bottom: -16%;
+            }
+
+            #message {
+                /*
+                 * Subimos el texto para que no quede cortado.
+                 */
+                bottom: 10%;
+            }
+        }
+
 
     </style>
 
@@ -1175,18 +1206,14 @@
             class="branch"
             style="animation-delay:4s"
             d="
-            M350 510
-            C295 470 240 430 180 360
-            C140 315 105 285 65 260
+            M350 510 C320 485 290 455 260 425 C235 395 215 370 195 345
             " />
 
         <path
             class="branch-light"
             style="animation-delay:4s"
             d="
-            M350 510
-            C295 470 240 430 180 360
-            C140 315 105 285 65 260
+            M350 510 C320 485 290 455 260 425 C235 395 215 370 195 345
             " />
 
 
@@ -1194,18 +1221,14 @@
             class="branch"
             style="animation-delay:4.2s"
             d="
-            M350 510
-            C405 465 460 425 520 350
-            C555 305 590 275 635 260
+            M350 510 C380 485 410 455 440 425 C465 395 485 370 505 345
             " />
 
         <path
             class="branch-light"
             style="animation-delay:4.2s"
             d="
-            M350 510
-            C405 465 460 425 520 350
-            C555 305 590 275 635 260
+            M350 510 C380 485 410 455 440 425 C465 395 485 370 505 345
             " />
 
 
@@ -1217,18 +1240,14 @@
             class="branch"
             style="animation-delay:4.4s"
             d="
-            M345 390
-            C300 345 245 285 205 220
-            C175 175 135 145 95 125
+            M345 390 C320 355 295 320 270 285 C250 260 230 240 210 225
             " />
 
         <path
             class="branch-light"
             style="animation-delay:4.4s"
             d="
-            M345 390
-            C300 345 245 285 205 220
-            C175 175 135 145 95 125
+            M345 390 C320 355 295 320 270 285 C250 260 230 240 210 225
             " />
 
 
@@ -1236,18 +1255,14 @@
             class="branch"
             style="animation-delay:4.6s"
             d="
-            M350 390
-            C400 345 455 285 495 220
-            C525 175 565 145 605 125
+            M350 390 C380 355 405 320 430 285 C450 260 470 240 490 225
             " />
 
         <path
             class="branch-light"
             style="animation-delay:4.6s"
             d="
-            M350 390
-            C400 345 455 285 495 220
-            C525 175 565 145 605 125
+            M350 390 C380 355 405 320 430 285 C450 260 470 240 490 225
             " />
 
 
@@ -1259,16 +1274,14 @@
             class="branch small"
             style="animation-delay:5s"
             d="
-            M180 360
-            C145 335 115 305 90 270
+            M195 345 C175 325 155 305 140 285
             " />
 
         <path
             class="branch-light small"
             style="animation-delay:5s"
             d="
-            M180 360
-            C145 335 115 305 90 270
+            M195 345 C175 325 155 305 140 285
             " />
 
 
@@ -1276,16 +1289,14 @@
             class="branch small"
             style="animation-delay:5.1s"
             d="
-            M180 360
-            C135 350 100 330 65 305
+            M195 345 C170 340 150 330 130 315
             " />
 
         <path
             class="branch-light small"
             style="animation-delay:5.1s"
             d="
-            M180 360
-            C135 350 100 330 65 305
+            M195 345 C170 340 150 330 130 315
             " />
 
 
@@ -1293,16 +1304,14 @@
             class="branch small"
             style="animation-delay:5.2s"
             d="
-            M520 350
-            C555 330 585 300 610 260
+            M505 345 C525 325 545 305 560 285
             " />
 
         <path
             class="branch-light small"
             style="animation-delay:5.2s"
             d="
-            M520 350
-            C555 330 585 300 610 260
+            M505 345 C525 325 545 305 560 285
             " />
 
 
@@ -1310,16 +1319,14 @@
             class="branch small"
             style="animation-delay:5.3s"
             d="
-            M520 350
-            C565 340 600 320 635 295
+            M505 345 C530 340 550 330 570 315
             " />
 
         <path
             class="branch-light small"
             style="animation-delay:5.3s"
             d="
-            M520 350
-            C565 340 600 320 635 295
+            M505 345 C530 340 550 330 570 315
             " />
 
 
@@ -1331,16 +1338,14 @@
             class="branch small"
             style="animation-delay:5.4s"
             d="
-            M205 220
-            C165 195 130 165 100 125
+            M210 225 C190 210 170 195 155 180
             " />
 
         <path
             class="branch-light small"
             style="animation-delay:5.4s"
             d="
-            M205 220
-            C165 195 130 165 100 125
+            M210 225 C190 210 170 195 155 180
             " />
 
 
@@ -1348,16 +1353,14 @@
             class="branch small"
             style="animation-delay:5.45s"
             d="
-            M205 220
-            C165 220 125 205 85 180
+            M210 225 C190 225 170 220 150 210
             " />
 
         <path
             class="branch-light small"
             style="animation-delay:5.45s"
             d="
-            M205 220
-            C165 220 125 205 85 180
+            M210 225 C190 225 170 220 150 210
             " />
 
 
@@ -1365,16 +1368,14 @@
             class="branch small"
             style="animation-delay:5.5s"
             d="
-            M495 220
-            C535 195 570 165 600 125
+            M490 225 C510 210 530 195 545 180
             " />
 
         <path
             class="branch-light small"
             style="animation-delay:5.5s"
             d="
-            M495 220
-            C535 195 570 165 600 125
+            M490 225 C510 210 530 195 545 180
             " />
 
 
@@ -1382,16 +1383,14 @@
             class="branch small"
             style="animation-delay:5.55s"
             d="
-            M495 220
-            C535 220 575 205 615 180
+            M490 225 C510 225 530 220 550 210
             " />
 
         <path
             class="branch-light small"
             style="animation-delay:5.55s"
             d="
-            M495 220
-            C535 220 575 205 615 180
+            M490 225 C510 225 530 220 550 210
             " />
 
     </svg>
