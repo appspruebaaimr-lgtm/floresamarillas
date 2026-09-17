@@ -890,19 +890,11 @@
 
 
         /* =====================================================
-           TELÉFONO — DISEÑO INDEPENDIENTE
+           TELÉFONO — COMPOSICIÓN COMPACTA
         ===================================================== */
 
-        /*
-         * IMPORTANTE:
-         * No dependemos solamente de max-width:600px.
-         * En algunos teléfonos/tablets en modo horizontal el viewport
-         * puede superar 600px y entonces el diseño móvil anterior
-         * simplemente NO se ejecutaba.
-         */
-
         @media (max-width: 900px),
-               (pointer: coarse) and (max-height: 1000px) {
+               (pointer: coarse) and (max-height: 1200px) {
 
             #scene {
                 width: 100vw;
@@ -911,53 +903,35 @@
             }
 
 
-            /* =================================================
-               LUNA
-            ================================================= */
+            /* Luna más discreta */
 
             .moon {
-                width: 45px;
-                height: 45px;
+                width: 42px;
+                height: 42px;
                 top: 4%;
                 left: 5%;
             }
 
 
-            /* =================================================
-               ÁRBOL
+            /*
+             * ==================================================
+             * ÁRBOL
+             *
+             * Tamaño fijo y pequeño para que NO pueda volver
+             * a ocupar toda la pantalla.
+             *
+             * #flowers usa exactamente la misma caja.
+             * ==================================================
+             */
 
-               TAMAÑO REALMENTE PEQUEÑO.
-
-               max-width/max-height impiden que vuelva a crecer
-               aunque el teléfono esté en horizontal.
-            ================================================= */
-
-            #tree {
-                left: 50%;
-                bottom: 25%;
-
-                width: min(58vw, 430px);
-                height: min(52dvh, 430px);
-
-                transform: translateX(-50%);
-
-                overflow: visible;
-            }
-
-
-            /* =================================================
-               FLORES
-
-               El contenedor de flores debe tener EXACTAMENTE
-               las mismas dimensiones y posición que el árbol.
-            ================================================= */
-
+            #tree,
             #flowers {
                 left: 50%;
-                bottom: 25%;
 
-                width: min(58vw, 430px);
-                height: min(52dvh, 430px);
+                width: 420px;
+                height: 500px;
+
+                bottom: 23%;
 
                 transform: translateX(-50%);
 
@@ -965,13 +939,34 @@
             }
 
 
-            /* =================================================
-               FLORES — MÁS PEQUEÑAS
-            ================================================= */
+            /*
+             * En pantallas todavía más estrechas, el conjunto
+             * se hace proporcional al ancho disponible.
+             */
+
+            @media (max-width: 500px) {
+
+                #tree,
+                #flowers {
+                    width: 86vw;
+                    height: 500px;
+
+                    bottom: 23%;
+                }
+            }
+
+
+            /*
+             * ==================================================
+             * FLORES
+             *
+             * Más pequeñas para que el corazón conserve aire.
+             * ==================================================
+             */
 
             .flower {
-                width: 16px;
-                height: 16px;
+                width: 17px;
+                height: 17px;
             }
 
             .flower-inner {
@@ -985,30 +980,34 @@
             }
 
 
-            /* =================================================
-               RAMAS — MÁS DELGADAS
-            ================================================= */
+            /*
+             * ==================================================
+             * RAMAS
+             *
+             * Las ramas siguen perteneciendo al SVG del árbol.
+             * Al compartir caja con #flowers quedan debajo del
+             * mismo sistema de coordenadas.
+             * ==================================================
+             */
 
             .branch {
-                stroke-width: 11;
+                stroke-width: 12px;
             }
 
             .branch-light {
-                stroke-width: 3.5;
+                stroke-width: 4px;
             }
 
             .branch.small {
-                stroke-width: 6;
+                stroke-width: 7px;
             }
 
             .branch-light.small {
-                stroke-width: 2;
+                stroke-width: 2.5px;
             }
 
 
-            /* =================================================
-               PÉTALOS VOLANDO
-            ================================================= */
+            /* Pétalos */
 
             .flying-petal {
                 width: 8px;
@@ -1021,9 +1020,7 @@
             }
 
 
-            /* =================================================
-               SUELO
-            ================================================= */
+            /* Suelo */
 
             .ground {
                 height: 9%;
@@ -1031,13 +1028,18 @@
             }
 
 
-            /* =================================================
-               TEXTO — MUCHO MÁS PEQUEÑO
-            ================================================= */
+            /*
+             * ==================================================
+             * TEXTO
+             *
+             * Lo subimos para que quede completamente visible.
+             * ==================================================
+             */
 
             #message {
                 left: 5%;
-                bottom: 3%;
+                bottom: 8%;
+
                 width: 90%;
 
                 z-index: 30;
@@ -1052,14 +1054,12 @@
             #message p {
                 margin-top: 5px;
                 font-size: 12px;
-                line-height: 1.2;
+                line-height: 1.25;
                 max-width: 100%;
             }
 
 
-            /* =================================================
-               PANTALLA INICIAL
-            ================================================= */
+            /* Pantalla inicial */
 
             #startScreen h2 {
                 font-size: 22px;
