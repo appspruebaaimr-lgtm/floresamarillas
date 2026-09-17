@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mi nutria tierna</title>
+<title>Flores Amarillas</title>
 
 <style>
 * {
@@ -21,15 +21,9 @@ body {
 
 body {
     background:
-        radial-gradient(
-            circle at 50% 48%,
-            #1c1c11 0%,
-            #0b0c11 48%,
-            #030409 100%
-        );
-
+        radial-gradient(circle at 50% 48%, #191a10 0%, #090a0f 48%, #030408 100%);
     font-family: Georgia, "Times New Roman", serif;
-    color: white;
+    color: #fff;
 }
 
 /* ============================================================
@@ -38,10 +32,9 @@ body {
 
 .scene {
     position: relative;
-
     width: 100vw;
     height: 100vh;
-
+    min-height: 500px;
     overflow: hidden;
 }
 
@@ -51,10 +44,8 @@ body {
 
 .moon {
     position: absolute;
-
     width: 58px;
     height: 58px;
-
     left: 8%;
     top: 7%;
 
@@ -70,7 +61,6 @@ body {
 
 .moon::after {
     content: "";
-
     position: absolute;
 
     width: 7px;
@@ -91,7 +81,6 @@ body {
 .stars {
     position: absolute;
     inset: 0;
-
     pointer-events: none;
 }
 
@@ -102,17 +91,9 @@ body {
     height: 3px;
 
     border-radius: 50%;
-
     background: #fff9d9;
 
     box-shadow: 0 0 6px #fff3a5;
-}
-
-.star.small {
-    width: 2px;
-    height: 2px;
-
-    opacity: .7;
 }
 
 .s1 { left: 27%; top: 13%; }
@@ -126,12 +107,24 @@ body {
 .s9 { left: 30%; top: 76%; }
 .s10 { left: 92%; top: 58%; }
 
+.star.small {
+    width: 2px;
+    height: 2px;
+    opacity: .7;
+}
+
 /* ============================================================
    ÁRBOL
    ============================================================ */
 
 .tree {
     position: absolute;
+
+    /*
+       EL ÁRBOL AHORA ES PEQUEÑO.
+       Todo lo relacionado con las ramas y las flores está
+       contenido dentro de este mismo elemento.
+    */
 
     width: min(72vw, 570px);
     height: min(70vh, 540px);
@@ -145,21 +138,20 @@ body {
 }
 
 /* ============================================================
-   SVG / RAMAS
+   SVG DEL ÁRBOL
    ============================================================ */
 
 .tree-svg {
     position: absolute;
-
     inset: 0;
 
     width: 100%;
     height: 100%;
 
     overflow: visible;
-
-    z-index: 2;
 }
+
+/* Tronco */
 
 .trunk {
     fill: none;
@@ -183,6 +175,8 @@ body {
 
     opacity: .75;
 }
+
+/* Ramas */
 
 .branch {
     fill: none;
@@ -208,11 +202,17 @@ body {
 }
 
 /* ============================================================
-   FLORES
+   CORAZÓN DE FLORES
    ============================================================ */
 
 .flowers {
     position: absolute;
+
+    /*
+       IMPORTANTE:
+       El corazón está dentro del árbol.
+       No está colocado por fuera de las ramas.
+    */
 
     width: 82%;
     height: 67%;
@@ -221,18 +221,11 @@ body {
     top: 14%;
 
     overflow: visible;
-
-    /*
-       MUY IMPORTANTE:
-
-       Las flores están dentro del árbol.
-       No son un elemento separado de la estructura.
-    */
-
-    z-index: 3;
-
-    pointer-events: none;
 }
+
+/*
+   Cada flor se genera dentro del corazón.
+*/
 
 .flower {
     position: absolute;
@@ -240,11 +233,9 @@ body {
     width: 13px;
     height: 13px;
 
-    border-radius: 50%;
+    transform: translate(-50%, -50%);
 
-    transform:
-        translate(-50%, -50%)
-        scale(0);
+    border-radius: 50%;
 
     background:
         radial-gradient(
@@ -258,10 +249,11 @@ body {
     box-shadow:
         0 0 5px rgba(255, 216, 50, .95),
         0 0 12px rgba(255, 199, 30, .45);
-
-    animation:
-        bloom .55s cubic-bezier(.2,.8,.2,1) forwards;
 }
+
+/*
+   Forma de pequeños pétalos alrededor del centro.
+*/
 
 .flower::before,
 .flower::after {
@@ -279,11 +271,9 @@ body {
 
     background: #ffd52e;
 
-    opacity: .9;
-}
-
-.flower::before {
     transform: rotate(45deg);
+
+    opacity: .9;
 }
 
 .flower::after {
@@ -306,7 +296,7 @@ body {
     z-index: 2;
 }
 
-/* Flores pequeñas */
+/* Algunas flores un poco más pequeñas */
 
 .flower.small {
     width: 10px;
@@ -330,80 +320,7 @@ body {
 }
 
 /* ============================================================
-   ANIMACIÓN DE FLORES
-   ============================================================ */
-
-@keyframes bloom {
-
-    0% {
-        opacity: 0;
-
-        transform:
-            translate(-50%, -50%)
-            scale(0);
-    }
-
-    65% {
-        opacity: 1;
-
-        transform:
-            translate(-50%, -50%)
-            scale(1.18);
-    }
-
-    100% {
-        opacity: 1;
-
-        transform:
-            translate(-50%, -50%)
-            scale(1);
-    }
-}
-
-/*
-   Las flores de los DOS HUECOS tienen una animación diferente.
-
-   No aparecen al principio.
-   Se agregan mediante JavaScript después de que
-   el resto del corazón ya está formado.
-*/
-
-.late-flower {
-    animation-name: lateBloom;
-}
-
-@keyframes lateBloom {
-
-    0% {
-        opacity: 0;
-
-        transform:
-            translate(-50%, -50%)
-            scale(0)
-            rotate(-20deg);
-    }
-
-    60% {
-        opacity: 1;
-
-        transform:
-            translate(-50%, -50%)
-            scale(1.2)
-            rotate(8deg);
-    }
-
-    100% {
-        opacity: 1;
-
-        transform:
-            translate(-50%, -50%)
-            scale(1)
-            rotate(0deg);
-    }
-}
-
-/* ============================================================
-   LUCES
+   LUCES SUELTAS
    ============================================================ */
 
 .glow {
@@ -432,9 +349,7 @@ body {
 .g5 { left: 67%; top: 79%; animation-delay: .8s; }
 
 @keyframes float {
-
-    0%,
-    100% {
+    0%, 100% {
         transform: translateY(0);
         opacity: .55;
     }
@@ -446,11 +361,15 @@ body {
 }
 
 /* ============================================================
-   MENSAJE
+   TEXTO
    ============================================================ */
 
 .message {
     position: absolute;
+
+    /*
+       SUBIDO respecto al borde inferior.
+    */
 
     left: 8%;
     bottom: 8%;
@@ -468,7 +387,6 @@ body {
     margin: 0 0 3px 0;
 
     font-size: clamp(22px, 3.1vw, 31px);
-
     line-height: 1.05;
 
     color: #ffd84a;
@@ -478,7 +396,6 @@ body {
     margin: 0;
 
     font-size: clamp(13px, 1.7vw, 17px);
-
     line-height: 1.35;
 
     color: #fff4d0;
@@ -489,10 +406,14 @@ body {
 }
 
 /* ============================================================
-   MÓVIL
+   AJUSTES PARA CELULAR
    ============================================================ */
 
 @media (max-width: 600px) {
+
+    .scene {
+        min-height: 0;
+    }
 
     .moon {
         width: 42px;
@@ -507,12 +428,21 @@ body {
         height: 5px;
     }
 
+    /*
+       ÁRBOL MÁS PEQUEÑO EN CELULAR
+    */
+
     .tree {
         width: 88vw;
         height: 61vh;
 
         top: 7%;
     }
+
+    /*
+       Flores ligeramente más pequeñas
+       pero conservando la forma de corazón.
+    */
 
     .flower {
         width: 10px;
@@ -556,6 +486,10 @@ body {
         top: 3px;
     }
 
+    /*
+       TEXTO MÁS ARRIBA Y MÁS PEQUEÑO
+    */
+
     .message {
         left: 8%;
         bottom: 7%;
@@ -573,7 +507,7 @@ body {
 }
 
 /* ============================================================
-   PANTALLAS BAJAS
+   CELULARES MUY BAJOS
    ============================================================ */
 
 @media (max-height: 650px) and (max-width: 600px) {
@@ -605,7 +539,6 @@ body {
          ====================================================== -->
 
     <div class="stars">
-
         <div class="star s1"></div>
         <div class="star s2"></div>
         <div class="star s3"></div>
@@ -616,12 +549,10 @@ body {
         <div class="star s8"></div>
         <div class="star s9"></div>
         <div class="star s10"></div>
-
     </div>
 
-
     <!-- ======================================================
-         ÁRBOL
+         ÁRBOL COMPLETO
          ====================================================== -->
 
     <div class="tree">
@@ -636,7 +567,7 @@ body {
             preserveAspectRatio="xMidYMid meet"
         >
 
-            <!-- TRONCO -->
+            <!-- Tronco principal -->
 
             <path
                 class="trunk"
@@ -656,8 +587,11 @@ body {
                 "
             />
 
+            <!-- =================================================
+                 RAMAS GRANDES
+                 ================================================= -->
 
-            <!-- RAMA SUPERIOR IZQUIERDA -->
+            <!-- izquierda superior -->
 
             <path
                 class="branch"
@@ -677,8 +611,7 @@ body {
                 "
             />
 
-
-            <!-- RAMA SUPERIOR DERECHA -->
+            <!-- derecha superior -->
 
             <path
                 class="branch"
@@ -698,8 +631,7 @@ body {
                 "
             />
 
-
-            <!-- RAMA MEDIA IZQUIERDA -->
+            <!-- izquierda media -->
 
             <path
                 class="branch"
@@ -719,8 +651,7 @@ body {
                 "
             />
 
-
-            <!-- RAMA MEDIA DERECHA -->
+            <!-- derecha media -->
 
             <path
                 class="branch"
@@ -740,12 +671,8 @@ body {
                 "
             />
 
-
             <!-- =================================================
-                 RAMAS INTERNAS
-
-                 Estas son importantes porque quedan visibles
-                 entre las flores.
+                 RAMAS QUE SE METEN DENTRO DEL CORAZÓN
                  ================================================= -->
 
             <path
@@ -766,8 +693,7 @@ body {
                 "
             />
 
-
-            <!-- RAMAS PEQUEÑAS -->
+            <!-- ramas pequeñas -->
 
             <path
                 class="branch"
@@ -803,21 +729,16 @@ body {
 
         </svg>
 
-
         <!-- ==================================================
-             FLORES
+             CORAZÓN DE FLORES
              ================================================== -->
 
-        <div
-            class="flowers"
-            id="flowers"
-        ></div>
+        <div class="flowers" id="flowers"></div>
 
     </div>
 
-
     <!-- ======================================================
-         LUCES FLOTANTES
+         LUCES
          ====================================================== -->
 
     <div class="glow g1"></div>
@@ -826,16 +747,13 @@ body {
     <div class="glow g4"></div>
     <div class="glow g5"></div>
 
-
     <!-- ======================================================
-         TEXTO
+         MENSAJE
          ====================================================== -->
 
     <div class="message">
 
-        <h1>
-            Mi nutria tierna.
-        </h1>
+        <h1>Mi nutria tierna.</h1>
 
         <p>
             Jamás en la vida te faltarán amor, flores y detalles.
@@ -847,7 +765,6 @@ body {
 
 </div>
 
-
 <script>
 
 /* ============================================================
@@ -856,205 +773,95 @@ body {
 
 const container = document.getElementById("flowers");
 
+/*
+   Semilla para que las flores mantengan una distribución
+   estable y no cambien cada vez que se abre la página.
+*/
+
 let seed = 12345;
 
 function random() {
 
-    seed =
-        (seed * 9301 + 49297)
-        % 233280;
+    seed = (seed * 9301 + 49297) % 233280;
 
     return seed / 233280;
 }
 
 
-/* ============================================================
-   ECUACIÓN DEL CORAZÓN
-   ============================================================ */
+/*
+   Ecuación paramétrica aproximada del corazón.
+
+   x = 16 sin³(t)
+   y = 13 cos(t)
+       - 5 cos(2t)
+       - 2 cos(3t)
+       - cos(4t)
+*/
 
 function insideHeart(x, y) {
 
-    /*
-       Convertimos las coordenadas 0..1
-       al sistema del corazón.
-    */
-
     const hx = x * 2 - 1;
-
     const hy = -(y * 2 - 1);
 
-    const px = hx * 1.25;
+    /*
+       Escala del corazón.
+    */
 
+    const px = hx * 1.25;
     const py = hy * 1.25;
 
     const value =
-        Math.pow(
-            px * px +
-            py * py -
-            1,
-            3
-        )
+        Math.pow(px * px + py * py - 1, 3)
         -
-        px * px *
-        Math.pow(py, 3);
+        px * px * Math.pow(py, 3);
 
     return value <= 0;
 }
 
 
-/* ============================================================
-   CREAR UNA FLOR
-   ============================================================ */
+/*
+   Las flores se generan SOLAMENTE dentro del corazón.
+   Además, se evita que sobresalgan demasiado del área
+   donde están las ramas.
+*/
 
-function createFlower(
-    x,
-    y,
-    index,
-    late = false
-) {
+const flowers = [];
 
-    const flower =
-        document.createElement("div");
-
-    flower.className =
-        "flower" +
-        (index % 4 === 0 ? " small" : "") +
-        (late ? " late-flower" : "");
-
-    flower.style.left =
-        (x * 100) + "%";
-
-    flower.style.top =
-        (y * 100) + "%";
-
-
-    /*
-       Variación de tamaño.
-    */
-
-    const scale =
-        0.82 +
-        random() * 0.38;
-
-
-    /*
-       Retraso.
-
-       Las flores normales forman el corazón
-       progresivamente.
-    */
-
-    const delay =
-        late
-            ? random() * 500
-            : index * 13 + random() * 180;
-
-
-    flower.style.animationDelay =
-        delay + "ms";
-
-
-    flower.style.setProperty(
-        "--flower-scale",
-        scale
-    );
-
-
-    const center =
-        document.createElement("div");
-
-    center.className = "center";
-
-    flower.appendChild(center);
-
-    container.appendChild(flower);
-}
-
-
-/* ============================================================
-   PRIMERA FASE
-   ============================================================
-
-   Primero llenamos el corazón dejando deliberadamente
-   VACÍOS los dos espacios superiores que marcaste.
-
-   Esos espacios no se consideran errores:
-
-   son huecos reservados para la segunda fase.
-   ============================================================ */
-
-const totalFlowers = 145;
-
-let flowers = [];
+const totalFlowers = 135;
 
 let attempts = 0;
 
-while (
-    flowers.length < totalFlowers &&
-    attempts < 15000
-) {
+while (flowers.length < totalFlowers && attempts < 10000) {
 
     attempts++;
 
     const x = random();
     const y = random();
 
-
     /*
-       Sólo dentro del corazón.
+       Corazón más ancho arriba y más estrecho abajo.
     */
 
     if (!insideHeart(x, y)) {
         continue;
     }
 
-
     /*
-       Reservamos los DOS HUECOS.
-
-       HUECO IZQUIERDO:
-       aproximadamente x = .30 / y = .30
-
-       HUECO DERECHO:
-       aproximadamente x = .70 / y = .30
-
-       No ponemos flores ahí durante la primera fase.
+       Mantener las flores dentro del área de las ramas.
+       Esto evita que aparezcan completamente separadas
+       de la estructura del árbol.
     */
 
-    const leftHole =
-        Math.pow(x - 0.30, 2) +
-        Math.pow(y - 0.30, 2)
-        <
-        0.0105;
-
-
-    const rightHole =
-        Math.pow(x - 0.70, 2) +
-        Math.pow(y - 0.30, 2)
-        <
-        0.0105;
-
-
-    if (
-        leftHole ||
-        rightHole
-    ) {
-        continue;
-    }
-
+    const centerDistance =
+        Math.abs(x - 0.5);
 
     /*
-       Evitamos que la parte inferior
-       se haga demasiado ancha.
+       En la parte inferior el corazón se estrecha.
     */
 
-    if (
-        y > 0.68 &&
-        Math.abs(x - 0.5) > 0.20
-    ) {
+    if (y > 0.68 && centerDistance > 0.20) {
         continue;
     }
-
 
     flowers.push({
         x,
@@ -1063,162 +870,43 @@ while (
 }
 
 
-/* ============================================================
-   CREAR LAS FLORES PRINCIPALES
-   ============================================================ */
+/*
+   Crear las flores.
+*/
 
-flowers.forEach(
-    (pos, index) => {
+flowers.forEach((pos, index) => {
 
-        createFlower(
-            pos.x,
-            pos.y,
-            index,
-            false
-        );
+    const flower = document.createElement("div");
 
-    }
-);
+    flower.className =
+        "flower" +
+        (index % 4 === 0 ? " small" : "");
 
+    flower.style.left =
+        (pos.x * 100) + "%";
 
-/* ============================================================
-   SEGUNDA FASE:
-   LOS DOS HUECOS
-   ============================================================
-
-   Aquí está el cambio importante.
-
-   Esperamos a que el corazón esté prácticamente formado.
-
-   DESPUÉS llenamos los dos huecos.
-
-   Así se mantiene el efecto:
-
-       ramas
-         ↓
-       flores
-         ↓
-      corazón
-         ↓
-       huecos
-         ↓
-     cierre final ❤️
-   ============================================================ */
-
-setTimeout(
-    () => {
-
-        /*
-           -------------------------------
-           HUECO IZQUIERDO
-           -------------------------------
-        */
-
-        const leftHoleFlowers = [
-
-            [0.265, 0.265],
-            [0.300, 0.255],
-            [0.335, 0.270],
-
-            [0.245, 0.295],
-            [0.280, 0.300],
-            [0.315, 0.305],
-            [0.350, 0.300],
-
-            [0.260, 0.335],
-            [0.295, 0.340],
-            [0.330, 0.335],
-
-            [0.285, 0.370],
-            [0.315, 0.365]
-
-        ];
-
-
-        /*
-           -------------------------------
-           HUECO DERECHO
-           -------------------------------
-        */
-
-        const rightHoleFlowers = [
-
-            [0.665, 0.270],
-            [0.700, 0.255],
-            [0.735, 0.270],
-
-            [0.650, 0.300],
-            [0.685, 0.305],
-            [0.720, 0.300],
-            [0.750, 0.295],
-
-            [0.670, 0.335],
-            [0.705, 0.340],
-            [0.740, 0.330],
-
-            [0.685, 0.365],
-            [0.715, 0.365]
-
-        ];
-
-
-        /*
-           Primero llenamos el izquierdo.
-        */
-
-        leftHoleFlowers.forEach(
-            (pos, index) => {
-
-                createFlower(
-                    pos[0],
-                    pos[1],
-                    index,
-                    true
-                );
-
-            }
-        );
-
-
-        /*
-           Y después el derecho,
-           ligeramente escalonado.
-
-           Esto evita que ambos huecos aparezcan
-           instantáneamente al mismo tiempo.
-        */
-
-        setTimeout(
-            () => {
-
-                rightHoleFlowers.forEach(
-                    (pos, index) => {
-
-                        createFlower(
-                            pos[0],
-                            pos[1],
-                            index + 20,
-                            true
-                        );
-
-                    }
-                );
-
-            },
-            420
-        );
-
-    },
+    flower.style.top =
+        (pos.y * 100) + "%";
 
     /*
-       Esperamos aproximadamente 2 segundos.
-
-       Para ese momento el corazón principal
-       ya debe estar prácticamente formado.
+       Variación muy pequeña para que no parezcan
+       perfectamente uniformes.
     */
 
-    2100
-);
+    const scale =
+        0.82 + random() * 0.38;
+
+    flower.style.transform =
+        `translate(-50%, -50%) scale(${scale})`;
+
+    const center = document.createElement("div");
+
+    center.className = "center";
+
+    flower.appendChild(center);
+
+    container.appendChild(flower);
+});
 
 </script>
 
