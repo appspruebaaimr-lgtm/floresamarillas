@@ -321,9 +321,29 @@
 
         #flowers {
 
+            /*
+             * IMPORTANTE:
+             * Las flores usan coordenadas porcentuales que pertenecen
+             * al mismo sistema de coordenadas visual que el SVG.
+             *
+             * Antes #flowers ocupaba TODA la pantalla, mientras que
+             * #tree tenía otro tamaño. Por eso en teléfono las flores
+             * terminaban fuera del árbol.
+             *
+             * Ahora ambos contenedores tienen exactamente la misma
+             * posición, ancho y alto.
+             */
+
             position: absolute;
 
-            inset: 0;
+            left: 50%;
+            bottom: 5%;
+
+            width: min(690px, 100vw);
+            height: 83%;
+
+            transform:
+                translateX(-50%);
 
             pointer-events: none;
 
@@ -937,6 +957,22 @@
                ----------------------------------------------------- */
 
             #tree {
+                left: 50%;
+                bottom: 18%;
+
+                width: 94vw;
+                height: 62dvh;
+
+                transform:
+                    translateX(-50%);
+            }
+
+
+            /*
+             * Las flores DEBEN ocupar exactamente el mismo espacio
+             * que el árbol en móvil.
+             */
+            #flowers {
                 left: 50%;
                 bottom: 18%;
 
