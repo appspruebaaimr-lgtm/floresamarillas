@@ -321,29 +321,9 @@
 
         #flowers {
 
-            /*
-             * IMPORTANTE:
-             * Las flores usan coordenadas porcentuales que pertenecen
-             * al mismo sistema de coordenadas visual que el SVG.
-             *
-             * Antes #flowers ocupaba TODA la pantalla, mientras que
-             * #tree tenía otro tamaño. Por eso en teléfono las flores
-             * terminaban fuera del árbol.
-             *
-             * Ahora ambos contenedores tienen exactamente la misma
-             * posición, ancho y alto.
-             */
-
             position: absolute;
 
-            left: 50%;
-            bottom: 5%;
-
-            width: min(690px, 100vw);
-            height: 83%;
-
-            transform:
-                translateX(-50%);
+            inset: 0;
 
             pointer-events: none;
 
@@ -910,168 +890,156 @@
 
 
         /* =====================================================
-           CELULAR
+           CELULAR — COMPOSICIÓN REALMENTE REDUCIDA
         ===================================================== */
-
-        /* =====================================================
-           DISEÑO EXCLUSIVO PARA TELÉFONO
-           ===================================================== */
 
         @media (max-width: 600px) {
 
             /*
-             * =====================================================
-             * TELÉFONO — ESCALA 50%
-             *
-             * La composición completa se reduce aproximadamente
-             * a la mitad para dejar mucho más aire alrededor del
-             * árbol y reservar espacio para el mensaje.
-             * =====================================================
+             * La composición visual del árbol se reduce al 50%.
+             * Tanto #tree como #flowers se escalan juntos.
              */
 
-            html,
-            body {
-                width: 100%;
-                height: 100%;
-                overflow: hidden;
-            }
-
-            #scene {
-                width: 100vw;
-                height: 100dvh;
-                min-height: 100vh;
-            }
-
-
-            /* LUNA — 50% */
-
             .moon {
-                width: 26px;
-                height: 26px;
+                width: 52px;
+                height: 52px;
                 top: 5%;
                 left: 6%;
             }
 
 
-            /* ÁRBOL — 50% */
+            /* =================================================
+               CAJA COMÚN DEL ÁRBOL Y LAS FLORES
 
-            #tree {
-                left: 50%;
-                bottom: 29%;
-                width: 47vw;
-                height: 38dvh;
-                transform: translateX(-50%);
-            }
+               Ambos ocupan la misma caja y después se reducen
+               visualmente a la mitad mediante scale(.5).
+            ================================================= */
 
-
-            /*
-             * Las flores usan EXACTAMENTE la misma caja
-             * que el árbol para permanecer alineadas.
-             */
-
+            #tree,
             #flowers {
                 left: 50%;
-                bottom: 29%;
-                width: 47vw;
-                height: 38dvh;
-                transform: translateX(-50%);
+                bottom: 18%;
+
+                width: 100vw;
+                height: 70dvh;
+
+                transform:
+                    translateX(-50%)
+                    scale(.5);
+
+                transform-origin:
+                    50% 50%;
             }
 
 
-            /* FLORES — 50% */
+            /* =================================================
+               FLORES
+            ================================================= */
 
             .flower {
-                width: 8px;
-                height: 8px;
+                width: 31px;
+                height: 31px;
             }
 
             .flower-inner {
-                width: 3px;
-                height: 3px;
+                width: 9px;
+                height: 9px;
             }
 
             .petal {
-                width: 7px;
-                height: 11px;
+                width: 14px;
+                height: 22px;
             }
 
 
-            /* RAMAS — 50% */
+            /* =================================================
+               RAMAS
 
-            .branch {
-                stroke-width: 10px;
+               El SVG completo ya está al 50%, por lo que no
+               necesitamos alterar sus grosores.
+            ================================================= */
+
+
+            /* =================================================
+               PÉTALOS QUE SALEN DEL ÁRBOL
+            ================================================= */
+
+            .flying-petal {
+                width: 10px;
+                height: 17px;
             }
 
-            .branch-light {
-                stroke-width: 3px;
-            }
 
-            .branch.small {
-                stroke-width: 5.5px;
-            }
-
-            .branch-light.small {
-                stroke-width: 2px;
-            }
-
-
-            /* SUELO — 50% */
+            /* =================================================
+               SUELO
+            ================================================= */
 
             .ground {
-                bottom: -6px;
-                height: 5.5%;
+                bottom: -10px;
+                height: 10%;
             }
 
 
-            /* MENSAJE — 50% */
+            /* =================================================
+               MENSAJE
+
+               También reducimos realmente la tipografía.
+            ================================================= */
 
             #message {
                 left: 5%;
-                bottom: 3.5%;
+                bottom: 4%;
                 width: 90%;
                 padding-right: 2%;
             }
 
             #message h1 {
-                font-size: clamp(14px, 3.5vw, 18px);
-                line-height: 1;
+                font-size:
+                    clamp(18px, 5vw, 26px);
+
+                line-height: 1.05;
+
                 white-space: nowrap;
             }
 
             #message p {
-                margin-top: 4px;
-                font-size: clamp(8px, 2vw, 11px);
-                line-height: 1.2;
+                margin-top: 5px;
+
+                font-size:
+                    clamp(10px, 2.8vw, 14px);
+
+                line-height: 1.25;
+
                 max-width: 100%;
             }
 
 
-            /* PÉTALOS — 50% */
-
-            .flying-petal {
-                width: 6px;
-                height: 11px;
-            }
-
-            .intro-petal {
-                width: 6px;
-                height: 11px;
-            }
-
-
-            /* PANTALLA INICIAL — 50% */
+            /* =================================================
+               PANTALLA INICIAL
+            ================================================= */
 
             #startScreen h2 {
-                font-size: clamp(14px, 3.5vw, 24px);
-                margin-bottom: 12px;
+                font-size:
+                    clamp(18px, 5vw, 28px);
+
+                margin-bottom: 14px;
             }
 
             #startButton {
-                padding: 7px 15px;
-                font-size: 9px;
+                padding:
+                    8px 16px;
+
+                font-size: 10px;
+            }
+
+
+            /* PÉTALOS DE LA INTRODUCCIÓN */
+
+            .intro-petal {
+                width: 10px;
+                height: 17px;
             }
         }
-
 
     </style>
 
