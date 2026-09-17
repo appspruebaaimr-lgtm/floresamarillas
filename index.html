@@ -919,6 +919,16 @@
 
         @media (max-width: 600px) {
 
+            /*
+             * =====================================================
+             * TELÉFONO — ESCALA 50%
+             *
+             * La composición completa se reduce aproximadamente
+             * a la mitad para dejar mucho más aire alrededor del
+             * árbol y reservar espacio para el mensaje.
+             * =====================================================
+             */
+
             html,
             body {
                 width: 100%;
@@ -933,154 +943,135 @@
             }
 
 
-            /* -----------------------------------------------------
-               LUNA
-               ----------------------------------------------------- */
+            /* LUNA — 50% */
 
             .moon {
-                width: 52px;
-                height: 52px;
+                width: 26px;
+                height: 26px;
                 top: 5%;
                 left: 6%;
             }
 
 
-            /* -----------------------------------------------------
-               ÁRBOL
-
-               En vez de hacerlo más ancho que la pantalla,
-               aquí le reservamos una zona concreta:
-
-               - copa: parte superior
-               - tronco: centro inferior
-               - mensaje: parte inferior
-               ----------------------------------------------------- */
+            /* ÁRBOL — 50% */
 
             #tree {
                 left: 50%;
-                bottom: 18%;
-
-                width: 82vw;
-                height: 54dvh;
-
-                transform:
-                    translateX(-50%);
+                bottom: 29%;
+                width: 47vw;
+                height: 38dvh;
+                transform: translateX(-50%);
             }
 
 
             /*
-             * Las flores DEBEN ocupar exactamente el mismo espacio
-             * que el árbol en móvil.
+             * Las flores usan EXACTAMENTE la misma caja
+             * que el árbol para permanecer alineadas.
              */
+
             #flowers {
                 left: 50%;
-                bottom: 18%;
-
-                width: 82vw;
-                height: 54dvh;
-
-                transform:
-                    translateX(-50%);
+                bottom: 29%;
+                width: 47vw;
+                height: 38dvh;
+                transform: translateX(-50%);
             }
 
 
-            /* -----------------------------------------------------
-               FLORES
-               ----------------------------------------------------- */
+            /* FLORES — 50% */
 
             .flower {
-                width: 16px;
-                height: 16px;
+                width: 8px;
+                height: 8px;
             }
 
             .flower-inner {
-                width: 5px;
-                height: 5px;
+                width: 3px;
+                height: 3px;
             }
 
             .petal {
-                width: 8px;
-                height: 13px;
+                width: 7px;
+                height: 11px;
             }
 
 
-            /* -----------------------------------------------------
-               RAMAS
-
-               Las hacemos un poco más discretas en móvil.
-               La geometría de las ramas NO cambia.
-               ----------------------------------------------------- */
+            /* RAMAS — 50% */
 
             .branch {
-                stroke-width: 12;
+                stroke-width: 10px;
             }
 
             .branch-light {
-                stroke-width: 4;
+                stroke-width: 3px;
             }
 
             .branch.small {
-                stroke-width: 7;
+                stroke-width: 5.5px;
             }
 
             .branch-light.small {
-                stroke-width: 2.5;
+                stroke-width: 2px;
             }
 
 
-            /* -----------------------------------------------------
-               SUELO
-               ----------------------------------------------------- */
+            /* SUELO — 50% */
 
             .ground {
-                bottom: -12px;
-                height: 11%;
+                bottom: -6px;
+                height: 5.5%;
             }
 
 
-            /* -----------------------------------------------------
-               MENSAJE
-
-               Tiene una zona propia abajo para que nunca quede
-               encima de la copa.
-               ----------------------------------------------------- */
+            /* MENSAJE — 50% */
 
             #message {
                 left: 5%;
                 bottom: 3.5%;
                 width: 90%;
-
                 padding-right: 2%;
             }
 
             #message h1 {
-                font-size: clamp(20px, 5.5vw, 28px);
-                line-height: 1.0;
+                font-size: clamp(14px, 3.5vw, 18px);
+                line-height: 1;
                 white-space: nowrap;
             }
 
             #message p {
                 margin-top: 4px;
-                font-size: clamp(11px, 3vw, 14px);
+                font-size: clamp(8px, 2vw, 11px);
                 line-height: 1.2;
                 max-width: 100%;
             }
 
 
-            /* -----------------------------------------------------
-               PÉTALOS
-               ----------------------------------------------------- */
+            /* PÉTALOS — 50% */
 
             .flying-petal {
-                width: 9px;
-                height: 15px;
+                width: 6px;
+                height: 11px;
             }
 
             .intro-petal {
-                width: 10px;
-                height: 17px;
+                width: 6px;
+                height: 11px;
+            }
+
+
+            /* PANTALLA INICIAL — 50% */
+
+            #startScreen h2 {
+                font-size: clamp(14px, 3.5vw, 24px);
+                margin-bottom: 12px;
+            }
+
+            #startButton {
+                padding: 7px 15px;
+                font-size: 9px;
             }
         }
+
 
     </style>
 
