@@ -890,40 +890,84 @@
 
 
         /* =====================================================
-           TELÉFONO — DISEÑO REDUCIDO
+           TELÉFONO — DISEÑO INDEPENDIENTE
         ===================================================== */
 
-        @media (max-width: 600px) {
+        /*
+         * IMPORTANTE:
+         * No dependemos solamente de max-width:600px.
+         * En algunos teléfonos/tablets en modo horizontal el viewport
+         * puede superar 600px y entonces el diseño móvil anterior
+         * simplemente NO se ejecutaba.
+         */
 
-            /*
-             * IMPORTANTE:
-             * NO usamos transform: scale() aquí.
-             *
-             * El tamaño real de la caja del árbol y de las flores
-             * se reduce directamente. Así las flores también se
-             * reducen junto con el árbol.
-             */
+        @media (max-width: 900px),
+               (pointer: coarse) and (max-height: 1000px) {
 
-            #tree,
-            #flowers {
-                position: absolute;
-
-                left: 50%;
-
-                width: 58vw;
-                height: 48dvh;
-
-                bottom: 27%;
-
-                transform: translateX(-50%);
-
-                transform-origin: center center;
+            #scene {
+                width: 100vw;
+                height: 100dvh;
+                overflow: hidden;
             }
 
 
-            /* -------------------------
+            /* =================================================
+               LUNA
+            ================================================= */
+
+            .moon {
+                width: 45px;
+                height: 45px;
+                top: 4%;
+                left: 5%;
+            }
+
+
+            /* =================================================
+               ÁRBOL
+
+               TAMAÑO REALMENTE PEQUEÑO.
+
+               max-width/max-height impiden que vuelva a crecer
+               aunque el teléfono esté en horizontal.
+            ================================================= */
+
+            #tree {
+                left: 50%;
+                bottom: 25%;
+
+                width: min(58vw, 430px);
+                height: min(52dvh, 430px);
+
+                transform: translateX(-50%);
+
+                overflow: visible;
+            }
+
+
+            /* =================================================
                FLORES
-               ------------------------- */
+
+               El contenedor de flores debe tener EXACTAMENTE
+               las mismas dimensiones y posición que el árbol.
+            ================================================= */
+
+            #flowers {
+                left: 50%;
+                bottom: 25%;
+
+                width: min(58vw, 430px);
+                height: min(52dvh, 430px);
+
+                transform: translateX(-50%);
+
+                overflow: visible;
+            }
+
+
+            /* =================================================
+               FLORES — MÁS PEQUEÑAS
+            ================================================= */
 
             .flower {
                 width: 16px;
@@ -941,30 +985,30 @@
             }
 
 
-            /* -------------------------
-               LUNA
-               ------------------------- */
+            /* =================================================
+               RAMAS — MÁS DELGADAS
+            ================================================= */
 
-            .moon {
-                width: 45px;
-                height: 45px;
+            .branch {
+                stroke-width: 11;
+            }
 
-                top: 5%;
-                left: 6%;
+            .branch-light {
+                stroke-width: 3.5;
+            }
+
+            .branch.small {
+                stroke-width: 6;
+            }
+
+            .branch-light.small {
+                stroke-width: 2;
             }
 
 
-            /* -------------------------
-               RAMAS
-
-               Como el SVG es más pequeño, conservamos
-               sus proporciones.
-               ------------------------- */
-
-
-            /* -------------------------
+            /* =================================================
                PÉTALOS VOLANDO
-               ------------------------- */
+            ================================================= */
 
             .flying-petal {
                 width: 8px;
@@ -977,9 +1021,9 @@
             }
 
 
-            /* -------------------------
+            /* =================================================
                SUELO
-               ------------------------- */
+            ================================================= */
 
             .ground {
                 height: 9%;
@@ -987,14 +1031,13 @@
             }
 
 
-            /* -------------------------
-               TEXTO FINAL
-               ------------------------- */
+            /* =================================================
+               TEXTO — MUCHO MÁS PEQUEÑO
+            ================================================= */
 
             #message {
                 left: 5%;
-                bottom: 4%;
-
+                bottom: 3%;
                 width: 90%;
 
                 z-index: 30;
@@ -1002,26 +1045,21 @@
 
             #message h1 {
                 font-size: 22px;
-
                 line-height: 1;
-
                 white-space: nowrap;
             }
 
             #message p {
                 margin-top: 5px;
-
                 font-size: 12px;
-
-                line-height: 1.25;
-
+                line-height: 1.2;
                 max-width: 100%;
             }
 
 
-            /* -------------------------
+            /* =================================================
                PANTALLA INICIAL
-               ------------------------- */
+            ================================================= */
 
             #startScreen h2 {
                 font-size: 22px;
