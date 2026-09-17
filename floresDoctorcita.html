@@ -1,0 +1,2112 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Para ti</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+
+            width: 100%;
+            height: 100%;
+
+            overflow: hidden;
+        }
+
+
+        body {
+
+            background:
+                radial-gradient(
+                    circle at 50% 55%,
+                    #40330e 0%,
+                    #1b180b 35%,
+                    #090a10 70%,
+                    #020307 100%
+                );
+
+            font-family: Georgia, serif;
+        }
+
+
+        /* =====================================================
+           ESCENA
+        ===================================================== */
+
+        #scene {
+
+            position: relative;
+
+            width: 100%;
+            height: 100vh;
+
+            overflow: hidden;
+        }
+
+
+        /* =====================================================
+           LUNA
+        ===================================================== */
+
+        .moon {
+
+            position: absolute;
+
+            width: 105px;
+            height: 105px;
+
+            top: 7%;
+            left: 9%;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle at 35% 32%,
+                    #fffef0 0%,
+                    #fff5bd 50%,
+                    #e5c95d 100%
+                );
+
+            box-shadow:
+
+                0 0 20px
+                rgba(255,246,180,.9),
+
+                0 0 50px
+                rgba(255,225,100,.45),
+
+                0 0 100px
+                rgba(255,220,80,.2);
+
+            z-index: 1;
+        }
+
+
+        /* =====================================================
+           ESTRELLAS
+        ===================================================== */
+
+        .star {
+
+            position: absolute;
+
+            width: 3px;
+            height: 3px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            box-shadow:
+                0 0 8px white;
+
+            animation:
+                twinkle 3s infinite ease-in-out;
+
+            z-index: 0;
+        }
+
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+
+                opacity: .25;
+
+                transform:
+                    scale(.7);
+            }
+
+            50% {
+
+                opacity: 1;
+
+                transform:
+                    scale(1.5);
+            }
+        }
+
+
+        /* =====================================================
+           SUELO
+        ===================================================== */
+
+        .ground {
+
+            position: absolute;
+
+            bottom: -20px;
+            left: -10%;
+
+            width: 120%;
+            height: 17%;
+
+            background:
+                radial-gradient(
+                    ellipse at center,
+                    #29391b 0%,
+                    #17230f 55%,
+                    #080d08 100%
+                );
+
+            border-radius:
+                50% 50% 0 0;
+
+            box-shadow:
+                0 -10px 40px
+                rgba(0,0,0,.5);
+
+            z-index: 8;
+        }
+
+
+        /* =====================================================
+           ÁRBOL
+        ===================================================== */
+
+        #tree {
+
+            position: absolute;
+
+            left: 50%;
+            bottom: 5%;
+
+            width: min(690px, 100vw);
+            height: 83%;
+
+            transform:
+                translateX(-50%);
+
+            overflow: visible;
+
+            z-index: 4;
+        }
+
+
+        /* =====================================================
+           TRONCO
+        ===================================================== */
+
+        .trunk {
+
+            fill: none;
+
+            stroke: #382212;
+
+            stroke-width: 30;
+
+            stroke-linecap: round;
+            stroke-linejoin: round;
+
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+
+            animation:
+                growTree 5s ease-out forwards;
+        }
+
+
+        .trunk-light {
+
+            fill: none;
+
+            stroke: #634020;
+
+            stroke-width: 8;
+
+            stroke-linecap: round;
+
+            stroke-dasharray: 800;
+            stroke-dashoffset: 800;
+
+            animation:
+                growTree 5s ease-out .3s forwards;
+        }
+
+
+        @keyframes growTree {
+
+            to {
+
+                stroke-dashoffset: 0;
+            }
+        }
+
+
+        /* =====================================================
+           RAMAS
+        ===================================================== */
+
+        .branch {
+
+            fill: none;
+
+            stroke: #432914;
+
+            stroke-width: 20;
+
+            stroke-linecap: round;
+            stroke-linejoin: round;
+
+            stroke-dasharray: 700;
+            stroke-dashoffset: 700;
+
+            animation:
+                growBranch 3s ease-out forwards;
+        }
+
+
+        .branch-light {
+
+            fill: none;
+
+            stroke: #634020;
+
+            stroke-width: 6;
+
+            stroke-linecap: round;
+            stroke-linejoin: round;
+
+            stroke-dasharray: 700;
+            stroke-dashoffset: 700;
+
+            animation:
+                growBranch 3s ease-out forwards;
+        }
+
+
+        .branch.small {
+
+            stroke-width: 11;
+        }
+
+
+        .branch-light.small {
+
+            stroke-width: 4;
+        }
+
+
+        @keyframes growBranch {
+
+            to {
+
+                stroke-dashoffset: 0;
+            }
+        }
+
+
+        /* =====================================================
+           CONTENEDOR DE FLORES
+        ===================================================== */
+
+        #flowers {
+
+            position: absolute;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            z-index: 6;
+        }
+
+
+        /* =====================================================
+           FLOR
+        ===================================================== */
+
+        .flower {
+
+            position: absolute;
+
+            width: 31px;
+            height: 31px;
+
+            transform:
+                translate(-50%, -50%)
+                scale(0);
+
+            animation:
+
+                bloom .9s
+                cubic-bezier(.17,.89,.32,1.3)
+                forwards;
+
+            filter:
+
+                drop-shadow(
+                    0 0 5px
+                    rgba(255,200,0,.75)
+                )
+
+                drop-shadow(
+                    0 0 12px
+                    rgba(255,170,0,.35)
+                );
+        }
+
+
+        .flower-inner {
+
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            width: 9px;
+            height: 9px;
+
+            transform:
+                translate(-50%, -50%);
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #532c00,
+                    #9a5700 60%,
+                    #d78b00
+                );
+
+            z-index: 5;
+        }
+
+
+        .petal {
+
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            width: 14px;
+            height: 22px;
+
+            transform-origin:
+                50% 100%;
+
+            border-radius:
+                60% 60% 55% 55%;
+
+            background:
+                radial-gradient(
+                    circle at 35% 30%,
+                    #fff7a0,
+                    #ffd52e 45%,
+                    #e6a600 100%
+                );
+
+            transform:
+
+                translate(-50%, -100%)
+                rotate(var(--rotation))
+                translateY(-10px);
+        }
+
+
+        @keyframes bloom {
+
+            0% {
+
+                opacity: 0;
+
+                transform:
+                    translate(-50%, -50%)
+                    scale(0)
+                    rotate(-30deg);
+            }
+
+            70% {
+
+                opacity: 1;
+
+                transform:
+                    translate(-50%, -50%)
+                    scale(1.15)
+                    rotate(8deg);
+            }
+
+            100% {
+
+                opacity: 1;
+
+                transform:
+                    translate(-50%, -50%)
+                    scale(1)
+                    rotate(0deg);
+            }
+        }
+
+
+        /* =====================================================
+           PÉTALOS DEL ÁRBOL
+        ===================================================== */
+
+        #petals {
+
+            position: absolute;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            overflow: hidden;
+
+            z-index: 10;
+        }
+
+
+        .flying-petal {
+
+            position: absolute;
+
+            width: 13px;
+            height: 22px;
+
+            border-radius:
+                70% 40% 70% 40%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff18b,
+                    #ffc928 45%,
+                    #e79b00
+                );
+
+            box-shadow:
+                0 0 8px
+                rgba(255,193,7,.5);
+
+            animation:
+
+                flyPetal
+                var(--duration)
+                linear forwards;
+        }
+
+
+        @keyframes flyPetal {
+
+            0% {
+
+                transform:
+
+                    translate3d(
+                        0,
+                        0,
+                        0
+                    )
+
+                    rotate(0deg)
+                    scale(.7);
+
+                opacity: 0;
+            }
+
+            8% {
+
+                opacity: .95;
+            }
+
+            50% {
+
+                transform:
+
+                    translate3d(
+                        calc(var(--wind-x) * .45),
+                        calc(var(--wind-y) * .5),
+                        0
+                    )
+
+                    rotate(180deg)
+                    scale(1);
+            }
+
+            100% {
+
+                transform:
+
+                    translate3d(
+                        var(--wind-x),
+                        var(--wind-y),
+                        0
+                    )
+
+                    rotate(600deg)
+                    scale(.45);
+
+                opacity: 0;
+            }
+        }
+
+
+        /* =====================================================
+           PARTÍCULAS
+        ===================================================== */
+
+        #particles {
+
+            position: absolute;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            z-index: 3;
+        }
+
+
+        .particle {
+
+            position: absolute;
+
+            width: 4px;
+            height: 4px;
+
+            border-radius: 50%;
+
+            background: #ffe477;
+
+            box-shadow:
+                0 0 8px #ffd83d;
+
+            animation:
+                particleFloat
+                5s
+                ease-in-out
+                infinite;
+        }
+
+
+        @keyframes particleFloat {
+
+            0%,
+            100% {
+
+                opacity: .15;
+
+                transform:
+                    translateY(0)
+                    scale(.6);
+            }
+
+            50% {
+
+                opacity: .9;
+
+                transform:
+                    translateY(-35px)
+                    scale(1.2);
+            }
+        }
+
+
+        /* =====================================================
+           PÉTALOS DE LA PRIMERA PANTALLA
+        ===================================================== */
+
+        #introPetals {
+
+            position: absolute;
+
+            inset: 0;
+
+            overflow: hidden;
+
+            pointer-events: none;
+
+            z-index: 101;
+        }
+
+
+        .intro-petal {
+
+            position: absolute;
+
+            width: 13px;
+            height: 22px;
+
+            border-radius:
+                70% 40% 70% 40%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff18b,
+                    #ffc928 45%,
+                    #e79b00
+                );
+
+            box-shadow:
+                0 0 8px
+                rgba(255,193,7,.55);
+
+            animation:
+                introWind
+                var(--intro-duration)
+                linear infinite;
+
+            opacity: .9;
+        }
+
+
+        @keyframes introWind {
+
+            0% {
+
+                transform:
+                    translateX(-15vw)
+                    translateY(0)
+                    rotate(0deg);
+
+                opacity: 0;
+            }
+
+            10% {
+
+                opacity: .9;
+            }
+
+            50% {
+
+                transform:
+                    translateX(50vw)
+                    translateY(var(--intro-y))
+                    rotate(240deg);
+
+                opacity: 1;
+            }
+
+            90% {
+
+                opacity: .8;
+            }
+
+            100% {
+
+                transform:
+                    translateX(115vw)
+                    translateY(calc(var(--intro-y) * -0.4))
+                    rotate(600deg);
+
+                opacity: 0;
+            }
+        }
+
+
+        /* =====================================================
+           MENSAJE
+        ===================================================== */
+
+        #message {
+
+            position: absolute;
+
+            left: 4%;
+            bottom: 5%;
+
+            width: 38%;
+
+            text-align: left;
+
+            color: #fff4bd;
+
+            opacity: 0;
+
+            z-index: 30;
+
+            animation:
+                messageAppear
+                2s ease-out
+                11s forwards;
+        }
+
+
+        #message h1 {
+
+            font-size:
+                clamp(28px,6vw,50px);
+
+            color: #ffd83d;
+
+            text-shadow:
+
+                0 0 10px #ffcf28,
+
+                0 0 30px
+                rgba(255,180,0,.7);
+        }
+
+
+        #message p {
+
+            margin-top: 12px;
+
+            font-size:
+                clamp(16px,4vw,23px);
+
+            line-height: 1.5;
+        }
+
+
+        @keyframes messageAppear {
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        /* =====================================================
+           PANTALLA INICIAL
+        ===================================================== */
+
+        #startScreen {
+
+            position: absolute;
+
+            inset: 0;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            flex-direction: column;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #211c09,
+                    #05060a
+                );
+
+            z-index: 100;
+
+            transition:
+
+                opacity 1.5s ease,
+
+                visibility 1.5s ease;
+        }
+
+
+        #startScreen.hidden {
+
+            opacity: 0;
+
+            visibility: hidden;
+        }
+
+
+        #startScreen h2 {
+
+            color: #ffd83d;
+
+            font-size:
+                clamp(28px,7vw,48px);
+
+            margin-bottom: 25px;
+
+            text-align: center;
+
+            text-shadow:
+                0 0 20px #dca800;
+
+            z-index: 102;
+        }
+
+
+        #startButton {
+
+            border:
+                1px solid #e5b72e;
+
+            background:
+                rgba(255,204,51,.08);
+
+            color: #ffe77b;
+
+            padding:
+                14px 30px;
+
+            border-radius: 40px;
+
+            font-family:
+                Georgia, serif;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            transition: .3s ease;
+
+            box-shadow:
+                0 0 20px
+                rgba(255,193,7,.2);
+
+            z-index: 102;
+        }
+
+
+        #startButton:hover {
+
+            background:
+                rgba(255,204,51,.2);
+
+            box-shadow:
+                0 0 35px
+                rgba(255,193,7,.5);
+
+            transform:
+                scale(1.05);
+        }
+
+
+        /* =====================================================
+           CELULAR
+        ===================================================== */
+
+        /* =====================================================
+           DISEÑO EXCLUSIVO PARA TELÉFONO
+           ===================================================== */
+
+        @media (max-width: 600px) {
+
+            html,
+            body {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+
+            #scene {
+                width: 100vw;
+                height: 100dvh;
+                min-height: 100vh;
+            }
+
+
+            /* -----------------------------------------------------
+               LUNA
+               ----------------------------------------------------- */
+
+            .moon {
+                width: 58px;
+                height: 58px;
+                top: 5%;
+                left: 6%;
+            }
+
+
+            /* -----------------------------------------------------
+               ÁRBOL
+
+               En vez de hacerlo más ancho que la pantalla,
+               aquí le reservamos una zona concreta:
+
+               - copa: parte superior
+               - tronco: centro inferior
+               - mensaje: parte inferior
+               ----------------------------------------------------- */
+
+            #tree {
+                left: 50%;
+                bottom: 18%;
+
+                width: 94vw;
+                height: 62dvh;
+
+                transform:
+                    translateX(-50%);
+            }
+
+
+            /* -----------------------------------------------------
+               FLORES
+               ----------------------------------------------------- */
+
+            .flower {
+                width: 19px;
+                height: 19px;
+            }
+
+            .flower-inner {
+                width: 6px;
+                height: 6px;
+            }
+
+            .petal {
+                width: 9px;
+                height: 15px;
+            }
+
+
+            /* -----------------------------------------------------
+               RAMAS
+
+               Las hacemos un poco más discretas en móvil.
+               La geometría de las ramas NO cambia.
+               ----------------------------------------------------- */
+
+            .branch {
+                stroke-width: 15;
+            }
+
+            .branch-light {
+                stroke-width: 5;
+            }
+
+            .branch.small {
+                stroke-width: 8;
+            }
+
+            .branch-light.small {
+                stroke-width: 3;
+            }
+
+
+            /* -----------------------------------------------------
+               SUELO
+               ----------------------------------------------------- */
+
+            .ground {
+                bottom: -12px;
+                height: 11%;
+            }
+
+
+            /* -----------------------------------------------------
+               MENSAJE
+
+               Tiene una zona propia abajo para que nunca quede
+               encima de la copa.
+               ----------------------------------------------------- */
+
+            #message {
+                left: 5%;
+                bottom: 3.5%;
+                width: 90%;
+
+                padding-right: 2%;
+            }
+
+            #message h1 {
+                font-size: clamp(24px, 7vw, 34px);
+                line-height: 1.05;
+                white-space: nowrap;
+            }
+
+            #message p {
+                margin-top: 8px;
+                font-size: clamp(14px, 4.2vw, 18px);
+                line-height: 1.3;
+                max-width: 100%;
+            }
+
+
+            /* -----------------------------------------------------
+               PÉTALOS
+               ----------------------------------------------------- */
+
+            .flying-petal {
+                width: 10px;
+                height: 17px;
+            }
+
+            .intro-petal {
+                width: 10px;
+                height: 17px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div id="scene">
+
+
+    <!-- =================================================
+         LUNA
+    ================================================== -->
+
+    <div class="moon"></div>
+
+
+    <!-- =================================================
+         ESTRELLAS
+    ================================================== -->
+
+    <div class="star"
+         style="left:25%;top:9%;">
+    </div>
+
+    <div class="star"
+         style="left:42%;top:13%;animation-delay:1s;">
+    </div>
+
+    <div class="star"
+         style="left:62%;top:8%;animation-delay:.4s;">
+    </div>
+
+    <div class="star"
+         style="left:78%;top:17%;animation-delay:2s;">
+    </div>
+
+    <div class="star"
+         style="left:91%;top:11%;animation-delay:.8s;">
+    </div>
+
+    <div class="star"
+         style="left:18%;top:30%;animation-delay:1.5s;">
+    </div>
+
+    <div class="star"
+         style="left:84%;top:31%;animation-delay:2.2s;">
+    </div>
+
+    <div class="star"
+         style="left:55%;top:27%;animation-delay:.7s;">
+    </div>
+
+
+    <!-- =================================================
+         PARTÍCULAS
+    ================================================== -->
+
+    <div id="particles"></div>
+
+
+    <!-- =================================================
+         ÁRBOL
+    ================================================== -->
+
+    <svg id="tree"
+         viewBox="0 0 700 800"
+         preserveAspectRatio="xMidYMax meet">
+
+
+        <!-- =================================================
+             TRONCO
+        ================================================= -->
+
+        <path
+            class="trunk"
+            d="
+            M350 790
+            C335 700 340 630 350 550
+            C360 470 350 390 345 310
+            C342 250 350 190 350 130
+            " />
+
+
+        <path
+            class="trunk-light"
+            d="
+            M350 790
+            C335 700 340 630 350 550
+            C360 470 350 390 345 310
+            C342 250 350 190 350 130
+            " />
+
+
+        <!-- =================================================
+             RAMAS PRINCIPALES INFERIORES
+        ================================================== -->
+
+        <path
+            class="branch"
+            style="animation-delay:4s"
+            d="
+            M350 510
+            C295 470 240 430 180 360
+            C140 315 105 285 65 260
+            " />
+
+        <path
+            class="branch-light"
+            style="animation-delay:4s"
+            d="
+            M350 510
+            C295 470 240 430 180 360
+            C140 315 105 285 65 260
+            " />
+
+
+        <path
+            class="branch"
+            style="animation-delay:4.2s"
+            d="
+            M350 510
+            C405 465 460 425 520 350
+            C555 305 590 275 635 260
+            " />
+
+        <path
+            class="branch-light"
+            style="animation-delay:4.2s"
+            d="
+            M350 510
+            C405 465 460 425 520 350
+            C555 305 590 275 635 260
+            " />
+
+
+        <!-- =================================================
+             RAMAS SUPERIORES ABIERTAS
+        ================================================== -->
+
+        <path
+            class="branch"
+            style="animation-delay:4.4s"
+            d="
+            M345 390
+            C300 345 245 285 205 220
+            C175 175 135 145 95 125
+            " />
+
+        <path
+            class="branch-light"
+            style="animation-delay:4.4s"
+            d="
+            M345 390
+            C300 345 245 285 205 220
+            C175 175 135 145 95 125
+            " />
+
+
+        <path
+            class="branch"
+            style="animation-delay:4.6s"
+            d="
+            M350 390
+            C400 345 455 285 495 220
+            C525 175 565 145 605 125
+            " />
+
+        <path
+            class="branch-light"
+            style="animation-delay:4.6s"
+            d="
+            M350 390
+            C400 345 455 285 495 220
+            C525 175 565 145 605 125
+            " />
+
+
+        <!-- =================================================
+             RAMAS SECUNDARIAS INFERIORES
+        ================================================== -->
+
+        <path
+            class="branch small"
+            style="animation-delay:5s"
+            d="
+            M180 360
+            C145 335 115 305 90 270
+            " />
+
+        <path
+            class="branch-light small"
+            style="animation-delay:5s"
+            d="
+            M180 360
+            C145 335 115 305 90 270
+            " />
+
+
+        <path
+            class="branch small"
+            style="animation-delay:5.1s"
+            d="
+            M180 360
+            C135 350 100 330 65 305
+            " />
+
+        <path
+            class="branch-light small"
+            style="animation-delay:5.1s"
+            d="
+            M180 360
+            C135 350 100 330 65 305
+            " />
+
+
+        <path
+            class="branch small"
+            style="animation-delay:5.2s"
+            d="
+            M520 350
+            C555 330 585 300 610 260
+            " />
+
+        <path
+            class="branch-light small"
+            style="animation-delay:5.2s"
+            d="
+            M520 350
+            C555 330 585 300 610 260
+            " />
+
+
+        <path
+            class="branch small"
+            style="animation-delay:5.3s"
+            d="
+            M520 350
+            C565 340 600 320 635 295
+            " />
+
+        <path
+            class="branch-light small"
+            style="animation-delay:5.3s"
+            d="
+            M520 350
+            C565 340 600 320 635 295
+            " />
+
+
+        <!-- =================================================
+             RAMAS SECUNDARIAS SUPERIORES
+        ================================================== -->
+
+        <path
+            class="branch small"
+            style="animation-delay:5.4s"
+            d="
+            M205 220
+            C165 195 130 165 100 125
+            " />
+
+        <path
+            class="branch-light small"
+            style="animation-delay:5.4s"
+            d="
+            M205 220
+            C165 195 130 165 100 125
+            " />
+
+
+        <path
+            class="branch small"
+            style="animation-delay:5.45s"
+            d="
+            M205 220
+            C165 220 125 205 85 180
+            " />
+
+        <path
+            class="branch-light small"
+            style="animation-delay:5.45s"
+            d="
+            M205 220
+            C165 220 125 205 85 180
+            " />
+
+
+        <path
+            class="branch small"
+            style="animation-delay:5.5s"
+            d="
+            M495 220
+            C535 195 570 165 600 125
+            " />
+
+        <path
+            class="branch-light small"
+            style="animation-delay:5.5s"
+            d="
+            M495 220
+            C535 195 570 165 600 125
+            " />
+
+
+        <path
+            class="branch small"
+            style="animation-delay:5.55s"
+            d="
+            M495 220
+            C535 220 575 205 615 180
+            " />
+
+        <path
+            class="branch-light small"
+            style="animation-delay:5.55s"
+            d="
+            M495 220
+            C535 220 575 205 615 180
+            " />
+
+    </svg>
+
+
+    <!-- =================================================
+         FLORES
+    ================================================== -->
+
+    <div id="flowers"></div>
+
+
+    <!-- =================================================
+         PÉTALOS DEL ÁRBOL
+    ================================================== -->
+
+    <div id="petals"></div>
+
+
+    <!-- =================================================
+         MENSAJE
+    ================================================== -->
+
+    <div id="message">
+
+        <h1>
+            Mi nutria tierna.
+        </h1>
+
+        <p>
+            Jamas en la vida te faltaran amor, flores y detalles.<br>
+            Te amo. ❤️
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         PANTALLA INICIAL
+    ================================================== -->
+
+    <div id="startScreen">
+
+
+        <!-- =================================================
+             PÉTALOS DE LA PANTALLA INICIAL
+
+             Estos están DENTRO de startScreen,
+             por lo que ahora sí aparecen encima.
+        ================================================== -->
+
+        <div id="introPetals"></div>
+
+
+        <h2>
+            Un regalo para mi doctorcita...
+        </h2>
+
+
+        <button id="startButton">
+            Toca aqui doctorcita. 🌻
+        </button>
+
+
+    </div>
+
+
+    <!-- =================================================
+         SUELO
+    ================================================== -->
+
+    <div class="ground"></div>
+
+
+</div>
+
+
+
+<script>
+
+
+    /* =====================================================
+       ELEMENTOS
+    ===================================================== */
+
+    const flowerContainer =
+        document.getElementById("flowers");
+
+    const petalContainer =
+        document.getElementById("petals");
+
+    const particleContainer =
+        document.getElementById("particles");
+
+    const introPetalContainer =
+        document.getElementById("introPetals");
+
+    const startScreen =
+        document.getElementById("startScreen");
+
+    const startButton =
+        document.getElementById("startButton");
+
+
+    /* =====================================================
+       PARTÍCULAS
+    ===================================================== */
+
+    for (let i = 0; i < 35; i++) {
+
+        const particle =
+            document.createElement("div");
+
+        particle.className =
+            "particle";
+
+        particle.style.left =
+            Math.random() * 100 + "%";
+
+        particle.style.top =
+            (20 + Math.random() * 70) + "%";
+
+        particle.style.animationDelay =
+            Math.random() * 5 + "s";
+
+        particle.style.animationDuration =
+            (3 + Math.random() * 4) + "s";
+
+        particleContainer.appendChild(
+            particle
+        );
+    }
+
+
+    /* =====================================================
+       PÉTALOS DE LA PRIMERA PANTALLA
+    ===================================================== */
+
+    function createIntroPetal() {
+
+        const petal =
+            document.createElement("div");
+
+        petal.className =
+            "intro-petal";
+
+
+        /*
+         * Cada pétalo comienza
+         * fuera del lado izquierdo.
+         */
+
+        petal.style.left =
+            (-10 - Math.random() * 20) + "vw";
+
+
+        /*
+         * Posición vertical.
+         */
+
+        petal.style.top =
+            (5 + Math.random() * 90) + "%";
+
+
+        /*
+         * Movimiento vertical
+         * ligeramente diferente
+         * para cada pétalo.
+         */
+
+        petal.style.setProperty(
+            "--intro-y",
+            (-80 + Math.random() * 160) + "px"
+        );
+
+
+        /*
+         * Velocidad diferente.
+         */
+
+        petal.style.setProperty(
+            "--intro-duration",
+            (5 + Math.random() * 6) + "s"
+        );
+
+
+        /*
+         * Retraso aleatorio.
+         */
+
+        petal.style.animationDelay =
+            (-Math.random() * 10) + "s";
+
+
+        introPetalContainer.appendChild(
+            petal
+        );
+    }
+
+
+    /*
+     * Bastantes pétalos para que
+     * siempre haya movimiento
+     * en la pantalla inicial.
+     */
+
+    for (let i = 0; i < 35; i++) {
+
+        createIntroPetal();
+    }
+
+
+    /* =====================================================
+       CREAR FLOR
+    ===================================================== */
+
+    function createFlower(
+        x,
+        y,
+        delay = 0
+    ) {
+
+        const flower =
+            document.createElement("div");
+
+        flower.className =
+            "flower";
+
+
+        flower.style.left =
+            x + "%";
+
+        flower.style.top =
+            y + "%";
+
+
+        flower.style.animationDelay =
+            delay + "s";
+
+
+        /*
+         * Seis pétalos.
+         */
+
+        for (let i = 0; i < 6; i++) {
+
+            const petal =
+                document.createElement("div");
+
+            petal.className =
+                "petal";
+
+            petal.style.setProperty(
+                "--rotation",
+                (i * 60) + "deg"
+            );
+
+            flower.appendChild(
+                petal
+            );
+        }
+
+
+        /*
+         * Centro.
+         */
+
+        const center =
+            document.createElement("div");
+
+        center.className =
+            "flower-inner";
+
+        flower.appendChild(
+            center
+        );
+
+
+        flowerContainer.appendChild(
+            flower
+        );
+
+
+        /*
+         * Guardamos la posición
+         * para la renovación.
+         */
+
+        flower.dataset.x =
+            x;
+
+        flower.dataset.y =
+            y;
+
+
+        return flower;
+    }
+
+
+    /* =====================================================
+       CREAR COPA COMPLETA
+       
+       Ahora NO dejamos el centro vacío.
+
+       La copa se construye por capas:
+       
+       1. Base amplia
+       2. Zona central
+       3. Parte superior
+       4. Corazón visual
+    ===================================================== */
+
+    function createHeartFlowers() {
+
+        const points = [];
+
+
+        /* =================================================
+           CORAZÓN EXTERIOR
+
+           Conservamos la forma original del corazón.
+           Estas flores forman principalmente el contorno.
+        ================================================= */
+
+        function heartPoint(t) {
+
+            const x =
+                16 *
+                Math.pow(
+                    Math.sin(t),
+                    3
+                );
+
+            const y =
+                13 * Math.cos(t)
+                - 5 * Math.cos(2 * t)
+                - 2 * Math.cos(3 * t)
+                - Math.cos(4 * t);
+
+            return {
+                x,
+                y
+            };
+        }
+
+
+        /* =================================================
+           PRIMER CONTORNO
+        ================================================= */
+
+        for (
+            let t = 0;
+            t < Math.PI * 2;
+            t += 0.13
+        ) {
+
+            const p =
+                heartPoint(t);
+
+            points.push({
+                x:
+                    50 +
+                    p.x * 2.05,
+
+                y:
+                    36 -
+                    p.y * 1.75
+            });
+        }
+
+
+        /* =================================================
+           SEGUNDO CONTORNO
+        ================================================= */
+
+        for (
+            let t = 0;
+            t < Math.PI * 2;
+            t += 0.17
+        ) {
+
+            const p =
+                heartPoint(t);
+
+            points.push({
+                x:
+                    50 +
+                    p.x * 1.72,
+
+                y:
+                    36 -
+                    p.y * 1.48
+            });
+        }
+
+
+        /* =================================================
+           TERCERA CAPA
+
+           Esta era la zona que originalmente se dejaba
+           demasiado vacía.
+
+           NO rellenamos todo el árbol.
+           Solamente agregamos algunas flores DENTRO
+           del corazón para cerrar el hueco central.
+        ================================================= */
+
+        const innerFlowers = [
+
+            // Parte superior interna
+            [42, 27],
+            [50, 27],
+            [58, 27],
+
+            // Zona del corazón
+            [37, 31],
+            [45, 31],
+            [53, 31],
+            [63, 31],
+
+            [39, 35],
+            [47, 35],
+            [55, 35],
+            [61, 35],
+
+            // Centro
+            [42, 39],
+            [50, 39],
+            [58, 39],
+
+            [45, 43],
+            [53, 43],
+
+            // Parte inferior
+            [48, 47],
+            [52, 47],
+
+            // Relleno del hueco interno izquierdo
+            [29, 32],
+            [33, 35],
+            [29, 38],
+            [33, 41],
+
+            // Relleno del hueco interno derecho
+            [71, 32],
+            [67, 35],
+            [71, 38],
+            [67, 41]
+        ];
+
+
+        innerFlowers.forEach(
+            ([x, y]) => {
+
+                points.push({
+                    x,
+                    y
+                });
+
+            }
+        );
+
+
+        /* =================================================
+           CREAR FLORES
+
+           Se mantienen los límites del corazón.
+        ================================================= */
+
+        points.forEach(
+            (point, index) => {
+
+                const x =
+                    Math.max(
+                        7,
+                        Math.min(
+                            93,
+                            point.x
+                        )
+                    );
+
+                const y =
+                    Math.max(
+                        14,
+                        Math.min(
+                            58,
+                            point.y
+                        )
+                    );
+
+                createFlower(
+                    x,
+                    y,
+                    index * .045
+                );
+            }
+        );
+
+    }
+
+    /* =====================================================
+       PÉTALOS DEL ÁRBOL
+    ===================================================== */
+
+    function createFlyingPetal() {
+
+        const petal =
+            document.createElement("div");
+
+        petal.className =
+            "flying-petal";
+
+
+        /*
+         * Nacen dentro de la copa.
+         */
+
+        petal.style.left =
+            (
+                20 +
+                Math.random() * 60
+            ) + "%";
+
+
+        petal.style.top =
+            (
+                17 +
+                Math.random() * 40
+            ) + "%";
+
+
+        /*
+         * Viento.
+         */
+
+        const windX =
+            250 +
+            Math.random() * 450;
+
+        const windY =
+            -100 +
+            Math.random() * 500;
+
+
+        petal.style.setProperty(
+            "--wind-x",
+            windX + "px"
+        );
+
+
+        petal.style.setProperty(
+            "--wind-y",
+            windY + "px"
+        );
+
+
+        petal.style.setProperty(
+            "--duration",
+            (4 + Math.random() * 5) + "s"
+        );
+
+
+        petalContainer.appendChild(
+            petal
+        );
+
+
+        setTimeout(() => {
+
+            petal.remove();
+
+        }, 10000);
+    }
+
+
+    /* =====================================================
+       VIENTO
+    ===================================================== */
+
+    function startWind() {
+
+        setInterval(() => {
+
+            const amount =
+                1 +
+                Math.floor(
+                    Math.random() * 3
+                );
+
+
+            for (
+                let i = 0;
+                i < amount;
+                i++
+            ) {
+
+                setTimeout(
+                    createFlyingPetal,
+                    i * 250
+                );
+            }
+
+        }, 850);
+    }
+
+
+    /* =====================================================
+       RENOVACIÓN DE FLORES
+       
+       Las flores desaparecen y vuelven
+       exactamente al mismo lugar.
+    ===================================================== */
+
+    function renewFlowers() {
+
+        setInterval(() => {
+
+            const flowers =
+                document.querySelectorAll(
+                    ".flower"
+                );
+
+
+            if (
+                flowers.length === 0
+            ) {
+
+                return;
+            }
+
+
+            const index =
+                Math.floor(
+                    Math.random() *
+                    flowers.length
+                );
+
+
+            const oldFlower =
+                flowers[index];
+
+
+            const x =
+                oldFlower.dataset.x;
+
+            const y =
+                oldFlower.dataset.y;
+
+
+            oldFlower.style.transition =
+                "opacity .5s ease, transform .5s ease";
+
+
+            oldFlower.style.opacity =
+                "0";
+
+
+            oldFlower.style.transform =
+                "translate(-50%, -50%) scale(0)";
+
+
+            setTimeout(() => {
+
+                oldFlower.remove();
+
+
+                createFlower(
+                    x,
+                    y,
+                    0
+                );
+
+            }, 600);
+
+
+        }, 1400);
+    }
+
+
+    /* =====================================================
+       INICIAR
+    ===================================================== */
+
+    startButton.addEventListener(
+        "click",
+        () => {
+
+
+            /*
+             * ELIMINAMOS TODOS LOS PÉTALOS
+             * DE LA PRIMERA PANTALLA.
+             */
+
+            introPetalContainer.innerHTML =
+                "";
+
+
+            /*
+             * Ocultamos la pantalla.
+             */
+
+            startScreen.classList.add(
+                "hidden"
+            );
+
+
+            /*
+             * Esperamos a que termine
+             * de crecer el árbol.
+             */
+
+            setTimeout(() => {
+
+                createHeartFlowers();
+
+            }, 4500);
+
+
+            /*
+             * Después comienzan
+             * los pétalos del árbol
+             * y la renovación.
+             */
+
+            setTimeout(() => {
+
+                startWind();
+
+                renewFlowers();
+
+            }, 11000);
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+
+</html>
+
+```
