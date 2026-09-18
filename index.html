@@ -1857,17 +1857,34 @@
         /* =================================================
            DOS ÚLTIMOS HUECOS
 
-           Estas dos flores NO participan en la formación
+           Estas flores NO participan en la formación
            inicial del corazón.
 
            Primero se forma el corazón completo y, al final,
-           aparecen solamente estas dos flores para cerrar
+           aparecen estos dos grupos para cerrar por completo
            los dos espacios interiores que quedaban vacíos.
         ================================================= */
 
         const finalGapFlowers = [
-            [34, 31],
-            [66, 31]
+            /*
+             * Hueco izquierdo.
+             * El grupo entra hacia el centro para tapar el vacío
+             * sin invadir la hendidura superior del corazón.
+             */
+            [32, 29], [36, 29], [40, 29],
+            [32, 33], [36, 33], [40, 33], [44, 33],
+            [32, 37], [36, 37], [40, 37], [44, 37],
+            [34, 41], [38, 41], [42, 41],
+            [38, 45],
+
+            /*
+             * Hueco derecho: espejo del izquierdo.
+             */
+            [60, 29], [64, 29], [68, 29],
+            [56, 33], [60, 33], [64, 33], [68, 33],
+            [56, 37], [60, 37], [64, 37], [68, 37],
+            [58, 41], [62, 41], [66, 41],
+            [62, 45]
         ];
 
 
@@ -1911,11 +1928,15 @@
            RELLENO FINAL
 
            Esperamos a que termine de formarse el corazón
-           para que estas dos flores no alteren su silueta.
+           para que estos dos grupos no alteren la formación
+           de la silueta.
         ================================================= */
 
-        const finalDelay =
-            points.length * .045 + 1.2;
+        /*
+         * Las flores finales aparecen casi inmediatamente después
+         * de terminar la formación principal.
+         */
+        const finalDelay = 0.7;
 
 
         finalGapFlowers.forEach(
@@ -1924,7 +1945,7 @@
                 createFlower(
                     x,
                     y,
-                    finalDelay + index * .45
+                    finalDelay + index * .055
                 );
 
             }
